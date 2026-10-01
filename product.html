@@ -41,6 +41,7 @@ const P=[
 {name:'Nuvyza Clear Magnetic Phone Case – Slim Transparent Protective Cover with Modern Magnetic-Ring Style',img:'clearcase-v7.jpg',vmap:{Default:'clearcase-v7.jpg'},price:1599,old:1799,colors:[['Default','#777']],desc:'A slim transparent phone case for users who want everyday protection without hiding the original phone design. The clear back, raised perimeter and modern magnetic-ring style combine a lightweight look with practical daily protection.',long:'The Clear Magnetic Phone Case is made for users who prefer a lighter visual style. Its transparent back keeps the phone visible while the raised perimeter and camera area add everyday protection. The magnetic-ring design gives the case a modern accessory-focused appearance.',b:['Transparent minimalist back','Magnetic-ring style design','Raised camera and edge protection','Slim everyday profile','Clear, Black and Blue options']},
 {name:'Nuvyza Men’s Black Joggers – Comfortable Everyday Adult Fit, Sizes 9 & 10',img:'joggers-black.jpg',vmap:{Default:'joggers-black.jpg'},price:2399,old:2799,colors:[['Default','#777']],desc:'Comfortable black joggers designed for everyday casual wear with a clean athletic look.',long:'A versatile black-only jogger for adults, designed for daily wear and easy styling.',b:['Black color only','Adult sizes 9 and 10','Comfort-focused everyday fit','Easy casual styling']}
 ];
+const qs=new URLSearchParams(location.search);const id=Math.max(0,Math.min(P.length-1,Number(qs.get('id')||0)));const p=P[id];let selected=(p.colors&&p.colors[0]?p.colors[0][0]:'Default');document.getElementById('name').textContent=p.name;document.getElementById('price').innerHTML=`Rs. ${p.price.toLocaleString()} <span class="old">Rs. ${p.old.toLocaleString()}</span>`;document.getElementById('desc').textContent=p.desc;document.getElementById('long').textContent=p.long;document.getElementById('bullets').innerHTML=p.b.map(x=>`<li>${x}</li>`).join('');document.getElementById('colorName').textContent=selected;
 const COLOR_GALLERIES={
 0:{Black:['case-v7.jpg'],White:['case-v7.jpg'],Grey:['case-v7.jpg'],Navy:['case-v7.jpg']},
 1:{Black:['hoodie-v7.jpg'],White:['hoodie-v7.jpg'],Grey:['hoodie-v7.jpg'],Navy:['hoodie-v7.jpg'],Beige:['hoodie-v7.jpg']},
@@ -54,8 +55,7 @@ function gallery(){
  const byColor=COLOR_GALLERIES[id]||{};
  const imgs=byColor[selected];
  if(imgs&&imgs.length) return imgs;
- const base=(p.vmap&&p.vmap[selected])?p.vmap[selected]:p.img;
- return [base];
+ return [p.img];
 }
 function variantImg(){return gallery()[0]}
 function setGallery(){
